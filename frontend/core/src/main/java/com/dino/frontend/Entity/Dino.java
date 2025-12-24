@@ -12,6 +12,8 @@ import com.dino.frontend.Constants;
 import static com.dino.frontend.Constants.*;
 
 public class Dino {
+    private static Dino instance;
+
     private Texture idleTexture;
     private Texture runTexture;
     private TextureRegion idleRegion;
@@ -24,7 +26,7 @@ public class Dino {
     private float stateTime;
     private boolean isJumping;
 
-    public Dino(){
+    private Dino(){
         idleTexture = new Texture("dinoIdle.png"); // dino diam
         runTexture = new Texture("dinoRun.png"); // dino lari
 
@@ -43,6 +45,15 @@ public class Dino {
         stateTime = 0f;
 
         hitbox = new Rectangle(DINO_X_POS, y, idleTexture.getWidth(), idleTexture.getHeight()); // hitbox rectangle (x, y, width, height)
+
+        reset();
+    }
+
+    public static Dino getInstance(){
+        if(instance == null){
+            instance = new Dino();
+        }
+        return instance;
     }
 
     public void update(float delta){
@@ -64,6 +75,14 @@ public class Dino {
         hitbox.setPosition(DINO_X_POS, y);
     }
 
+    public void reset(){
+        y = GROUND_LEVEL;
+        isJumping = false;
+        velocityY = 0f;
+        stateTime = 0f;
+        hitbox.setPosition(DINO_X_POS, y);
+    }
+
     public void render(SpriteBatch batch){
         TextureRegion currentFrame;
 
@@ -82,5 +101,6 @@ public class Dino {
     public void dispose(){
         idleTexture.dispose();
         runTexture.dispose();
+        instance = null;
     }
 }
