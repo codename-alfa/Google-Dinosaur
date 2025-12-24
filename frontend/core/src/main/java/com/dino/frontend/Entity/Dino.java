@@ -59,8 +59,6 @@ public class Dino {
         if (y < GROUND_LEVEL) {
             y = GROUND_LEVEL;
             velocityY = 0;
-        }
-        if(velocityY == 0){
             isJumping = false;
         }
         hitbox.setPosition(DINO_X_POS, y);
