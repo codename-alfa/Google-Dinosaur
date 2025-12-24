@@ -20,7 +20,7 @@ public class Cactus {
     }
 
     public void update(float delta, float speed){
-        x -= speed; // speed dinamis
+        x -= speed * delta; // speed dinamis
         hitbox.setPosition(x, y);
         if(x < -texture.getWidth()){
             remove = true;
