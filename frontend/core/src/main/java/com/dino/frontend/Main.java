@@ -1,33 +1,28 @@
 package com.dino.frontend;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Game; // Gunakan Game, bukan ApplicationAdapter
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.dino.frontend.Screens.GameScreen; // Pastikan package sesuai
 
-public class Main extends ApplicationAdapter {
-    private SpriteBatch batch;
-    private Texture image;
+public class Main extends Game { // Extends Game
+    public SpriteBatch batch; // Public agar bisa diakses oleh Screen lain
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
+        // Langsung pindah ke layar permainan
+        this.setScreen(new GameScreen(this));
     }
 
     @Override
     public void render() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.draw(image, 140, 210);
-        batch.end();
+        super.render(); // Penting! Delegasikan render ke Screen yang aktif
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        image.dispose();
+        // Screen dispose otomatis ditangani jika dikelola dengan baik,
+        // tapi untuk simple project, batch.dispose() di sini cukup.
     }
 }
