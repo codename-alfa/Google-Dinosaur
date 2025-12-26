@@ -3,20 +3,27 @@ package com.dino.frontend.Entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Pool;
+
 import static com.dino.frontend.Constants.GROUND_LEVEL;
 
-public class Cactus {
+public class Cactus implements Pool.Poolable{
     private Texture texture;
     private float x, y;
     private Rectangle hitbox;
     private boolean remove;
 
-    public Cactus(float startX, Texture texture){
+    public Cactus(){
+        this.y = GROUND_LEVEL;
+        this.hitbox = new Rectangle();
+    }
+
+    public void init(float startX, Texture texture) {
         this.texture = texture;
         this.x = startX;
         this.y = GROUND_LEVEL;
-        this.hitbox = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
         this.remove = false;
+        this.hitbox.set(x, y, texture.getWidth(), texture.getHeight());
     }
 
     public void update(float delta, float speed){
@@ -37,5 +44,14 @@ public class Cactus {
 
     public boolean getRemove(){
         return remove;
+    }
+
+    @Override
+    public void reset() {
+        this.x = 0;
+        this.y = GROUND_LEVEL;
+        this.remove = false;
+        this.texture = null; // Lepas tekstur agar tidak memory leak
+        this.hitbox.set(0, 0, 0, 0); // Nol-kan hitbox
     }
 }
