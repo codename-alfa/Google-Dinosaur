@@ -2,7 +2,7 @@ package com.dino.frontend.Factory;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.dino.frontend.Entities.Cactus;
-import com.dino.frontend.Entities.CactusType;
+import com.dino.frontend.Enums.CactusType;
 import com.dino.frontend.Pools.CactusPool;
 
 public class CactusFactory {

@@ -1,4 +1,4 @@
-package com.dino.frontend.Entities;
+package com.dino.frontend.Enums;
 
 public enum CactusType {
     SINGLE,
