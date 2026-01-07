@@ -15,6 +15,7 @@ public class Dino {
 
     private Texture idleTexture;
     private Texture runTexture;
+    private Texture deadTexture;
     private TextureRegion idleRegion;
     private Animation<TextureRegion> runAnimation;
 
@@ -24,10 +25,12 @@ public class Dino {
 
     private float stateTime;
     private boolean isJumping;
+    private boolean isDead;
 
     private Dino(){
         idleTexture = new Texture("dinoIdle.png"); // dino diam
         runTexture = new Texture("dinoRun.png"); // dino lari
+        deadTexture = new Texture("dinoDead.png");
 
         idleRegion = new TextureRegion(idleTexture);
 
@@ -58,6 +61,10 @@ public class Dino {
     public void update(float delta){
         stateTime += delta;
 
+        if(isDead){
+            return;
+        }
+
         if((Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)) && !isJumping){
             velocityY = JUMP_VELOCITY;
             isJumping = true;
@@ -77,6 +84,7 @@ public class Dino {
     public void reset(){
         y = GROUND_LEVEL;
         isJumping = false;
+        isDead = false;
         velocityY = 0f;
         stateTime = 0f;
         hitbox.setPosition(DINO_X_POS, y);
@@ -84,8 +92,9 @@ public class Dino {
 
     public void render(SpriteBatch batch){
         TextureRegion currentFrame;
-
-        if(isJumping){
+        if(isDead){
+            currentFrame = new TextureRegion(deadTexture);
+        } else if(isJumping){
             currentFrame = idleRegion;
         } else{
             currentFrame = runAnimation.getKeyFrame(stateTime, true);
@@ -97,9 +106,14 @@ public class Dino {
         return hitbox;
     }
 
+    public void setDead(boolean isDead){
+        this.isDead = isDead;
+    }
+
     public void dispose(){
         idleTexture.dispose();
         runTexture.dispose();
+        deadTexture.dispose();
         instance = null;
     }
 }
