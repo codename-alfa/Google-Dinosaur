@@ -26,10 +26,10 @@ public class MainMenuScreen implements Screen {
         this.batch = game.batch;
         groundTx = new Texture("ground.png");
         dinoTx = new Texture("dinoIdle.png");
-        play_resumeBtn = new UiButton(new Texture("play_resume.png"), 72, 64);
-        leaderboardBtn = new UiButton(new Texture("leaderboard.png"), 72, 64);
-        accountBtn = new UiButton(new Texture("account.png"), 72, 64);
-        settingsBtn = new UiButton(new Texture("settings.png"), 72, 64);
+        play_resumeBtn = new UiButton("play_resume.png", 72, 64);
+        leaderboardBtn = new UiButton("leaderboard.png", 72, 64);
+        accountBtn = new UiButton("account.png", 72, 64);
+        settingsBtn = new UiButton("settings.png", 72, 64);
     }
 
     @Override
@@ -81,7 +81,6 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         groundTx.dispose();
-        dinoTx.dispose();
         play_resumeBtn.dispose();
         leaderboardBtn.dispose();
         settingsBtn.dispose();

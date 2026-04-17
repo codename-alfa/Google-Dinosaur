@@ -3,6 +3,7 @@ package com.dino.frontend;
 import com.badlogic.gdx.Game; // Gunakan Game, bukan ApplicationAdapter
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dino.frontend.Screens.GameScreen; // Pastikan package sesuai
+import com.dino.frontend.Screens.MainMenuScreen;
 
 public class Main extends Game { // Extends Game
     public SpriteBatch batch; // Public agar bisa diakses oleh Screen lain
@@ -11,7 +12,7 @@ public class Main extends Game { // Extends Game
     public void create() {
         batch = new SpriteBatch();
         // Langsung pindah ke layar permainan
-        this.setScreen(new GameScreen(this));
+        this.setScreen(new MainMenuScreen(this));
     }
 
     @Override
